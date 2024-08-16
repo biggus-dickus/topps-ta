@@ -17,7 +17,7 @@
 
 > What changes/additions would you make to the design?
 
-Was there the design at all? Personally, I'd get rid of that ShadCN nonsense, since at this stage, the app has no design at all. TailwindCSS is just enough. I also prefer working with the custom design systems and headless component libraries (e.g. Headless UI).
+Was there the design at all? Personally, I'd get rid of ShadCN, since at this stage, the app has no design at all. TailwindCSS is just enough. I also prefer working with the custom design systems and headless component libraries (e.g. Headless UI).
 
 > List a two or three features that you would consider implementing in the future that would add significant value to the project.
 
@@ -42,7 +42,7 @@ It took ~6 hours to complete:
 * thinking through the app structure, fighting the existential doom ~1h;
 * refreshing my knowledge of Next.js ~1h;
 * coding it all down (incrementally) ~1h;
-* styling, implementing the Shadcn thing (I'm very frustrated by the latter, since I had a nice minimalistic styling, which was brutally murdered by that useless crap; of course, they had to reinvent their own Select too!) ~30m;
+* styling, implementing the Shadcn thing (which I'm quite frustrated by) ~30m;
 * unsuccessful attempt to implement the pagination ~30m;
 * filling out the Readme.md ~30m;
 
@@ -52,7 +52,7 @@ The freaking response schema and response examples are listed in the GH docs! (a
 
 > Did you learn anything new?
 
-Yes: GH API + Next.js refresher (although I'll forget it all again in a week or two).
+Yes: GH API + Next.js refresher (although this knowledge may get lost again without regular practice).
 
 > Do you feel that this assignment allowed you to showcase your abilities effectively?
 
