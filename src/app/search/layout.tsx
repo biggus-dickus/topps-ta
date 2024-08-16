@@ -8,7 +8,7 @@ type PropTypes = {
 export default function SearchLayout({ children }: PropTypes) {
   return (
     <>
-      <nav className="px-5 py-7 mb-5 border-b border-slate-400">
+      <nav className="px-6 py-7 mb-5 border-b border-slate-400">
         <Link className="text-blue-500" href="/">Home</Link>
       </nav>
       <main>{children}</main>

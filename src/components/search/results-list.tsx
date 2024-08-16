@@ -13,23 +13,23 @@ export default function ResultsList({ results }: PropTypes) {
 
         return (
           <li key={result.id} className="my-4">
-            <h3 className="font-bold">
+            <h3 className="flex items-center gap-2.5 font-bold">
               <a
-                className="inline-flex items-center gap-2.5 hover:underline"
+                className="truncate hover:underline"
                 href={result.html_url}
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 {result.title}
-                {showIcons && (
-                  <span className="inline-flex gap-1">
+              </a>
+              {showIcons && (
+                <span className="inline-flex gap-1">
                     {result.state === 'closed' && (
                       <LockClosedIcon className="h-4 w-4" title="Closed" />
                     )}
-                    {result.pull_request && <PRIcon className="h-4 w-4" title="Pull request" />}
+                  {result.pull_request && <PRIcon className="h-4 w-4" title="Pull request" />}
                   </span>
-                )}
-              </a>
+              )}
             </h3>
             <small className="block">
               #{result.number} by {result.user.login} created on{' '}

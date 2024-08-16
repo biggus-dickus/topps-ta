@@ -3,6 +3,8 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { ChangeEventHandler, useId } from 'react'
 
+import { Checkbox, Label } from '@/components/ui'
+
 const issueStates = ['all', 'open', 'closed']
 
 export default function SearchFilters() {
@@ -20,11 +22,11 @@ export default function SearchFilters() {
     replace(`${pathname}?${qp.toString()}`)
   }
 
-  const handleChangePR: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChangePR = (checked: boolean) => {
     const qp = new URLSearchParams(searchParams)
     qp.set('page', '1')
 
-    if (e.target.checked) {
+    if (checked) {
       qp.set('pulls', 'true')
     } else {
       qp.delete('pulls')
@@ -37,8 +39,8 @@ export default function SearchFilters() {
       <h2>Search filters</h2>
 
       <form className="flex gap-7 my-2">
-        <div className="flex gap-2">
-          <label htmlFor={issueId}>Issue state:</label>
+        <div className="flex items-center gap-2">
+          <Label htmlFor={issueId}>Issue state:</Label>
           <select
             className="text-slate-500 capitalize"
             id={issueId}
@@ -53,14 +55,13 @@ export default function SearchFilters() {
           </select>
         </div>
 
-        <div className="flex gap-2">
-          <input
+        <div className="flex items-center gap-2">
+          <Checkbox
             checked={searchParams.has('pulls')}
             id={pullsId}
-            onChange={handleChangePR}
-            type="checkbox"
+            onCheckedChange={handleChangePR}
           />
-          <label htmlFor={pullsId}>Pull requests only</label>
+          <Label htmlFor={pullsId}>Pull requests only</Label>
         </div>
       </form>
     </section>
