@@ -21,11 +21,46 @@ Was there the design at all? Personally, I'd get rid of that ShadCN nonsense, si
 
 > List a two or three features that you would consider implementing in the future that would add significant value to the project.
 
-1. The UI of a healthy human being, provided by a professional designer. I'd happily code it down.
-2. Combine the search field and results into a single page. It's cumbersome to go back and forth (but the specs must be observed).
-3. The skeleton UI instead of the "Loading" message at the search results page. But the value of this improvement is not that high.
+1. [In hindsight] Add pagination. GH API has a non-trivial approach to pagination, and figuring it out + implementing it in the project will require additional time. And I'm already overtime. Moreover, the pagination feature was not explicitly mentioned in the requirements.
+2. [In hindsight] Augmenting the native HTML input validation (search page) with custom error messages.
+3. The UI of a healthy human being, provided by a professional designer. I'd happily code it down.
+4. Combine the search field and results into a single page. It's cumbersome to go back and forth (but the requirements must be observed).
+5. The skeleton UI instead of the "Loading" message at the search results page. But the value of this improvement is not that high.
 
 ### Looking Back
+
+> Describe the major design/build decisions and why you made them.
+
+Both the home and search results page are server components. The app state is managed through the url and search params.
+
+The initial search results are fetched on the server side and returned as html to the client. From there on, it would seem quicker to implement fetching and filtering on the client side, but since I initially intended to add pagination too (as regular html links), it made sense to manage the search state completely on the server.
+
+> How long did the assignment take (in hours)? Please break down your answer into buckets (e.g. "Learning Framework", "Coding", "Debugging").
+
+It took ~6 hours to complete:
+* researching the GH API (back and forth) ~1.5h;
+* thinking through the app structure, fighting the existential doom ~1h;
+* refreshing my knowledge of Next.js ~1h;
+* coding it all down (incrementally) ~1h;
+* styling, implementing the Shadcn thing (I'm very frustrated by the latter, since I had a nice minimalistic styling, which was brutally murdered by that useless crap; of course, they had to reinvent their own Select too!) ~30m;
+* unsuccessful attempt to implement the pagination ~30m;
+* filling out the Readme.md ~30m;
+
+> If you could go back and give yourself advice at the beginning of the project, what would it be?
+
+The freaking response schema and response examples are listed in the GH docs! (although they are very cumbersome to use too).
+
+> Did you learn anything new?
+
+Yes: GH API + Next.js refresher (although I'll forget it all again in a week or two).
+
+> Do you feel that this assignment allowed you to showcase your abilities effectively?
+
+Not quite, since I'm more used to SPAs (and can code them much faster). But this is my problem, I know.
+
+> Are there any significant web development-related skills that you possess that were not demonstrated in this exercise? If so, what are they?
+
+I prefer using the custom UI components, but this assignment is not about styling.
 
 ---
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
