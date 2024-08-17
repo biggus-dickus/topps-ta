@@ -5,9 +5,23 @@ const octokit = new Octokit({
   auth: process.env.GH_ACCESS_TOKEN,
 })
 
-// https://docs.github.com/en/rest/issues/issues
-export function getIssues(
-  params: RequestParameters & { repo: string; owner: string },
-) {
-  return octokit.request('GET /repos/{owner}/{repo}/issues', params)
+type BaseParams = {
+  owner: string
+  repo: string
+  state?: 'open' | 'closed'
+  type?: 'issue' | 'pull-request'
+}
+
+export const PER_PAGE = 30
+
+// https://docs.github.com/en/rest/search/search
+export function getIssues(params: BaseParams & RequestParameters) {
+  const { owner, repo, state, type = 'issue', ...rest } = params;
+
+  const qualifiers = [`is:${type}`, ...state ? [`state:${state}`] : []]
+
+  return octokit.request('GET /search/issues', {
+    q: `repo:${owner}/${repo}+${qualifiers.join('+')}`,
+    ...rest,
+  });
 }

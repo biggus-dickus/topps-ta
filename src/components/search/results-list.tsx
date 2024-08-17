@@ -24,11 +24,11 @@ export default function ResultsList({ results }: PropTypes) {
               </a>
               {showIcons && (
                 <span className="inline-flex gap-1">
-                    {result.state === 'closed' && (
-                      <LockClosedIcon className="h-4 w-4" title="Closed" />
-                    )}
+                  {result.state === 'closed' && (
+                    <LockClosedIcon className="h-4 w-4" title="Closed" />
+                  )}
                   {result.pull_request && <PRIcon className="h-4 w-4" title="Pull request" />}
-                  </span>
+                </span>
               )}
             </h3>
             <small className="block">

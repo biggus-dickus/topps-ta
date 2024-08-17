@@ -1,8 +1,9 @@
 import { Metadata } from 'next'
 
-import { getIssues } from '@/lib/api'
+import { getIssues, PER_PAGE } from '@/lib/api'
 
 import ResultsList from '@/components/search/results-list'
+import ResultsPagination from '@/components/search/results-pagination'
 import SearchFilters from '@/components/search/filters'
 
 export const metadata: Metadata = {
@@ -11,35 +12,47 @@ export const metadata: Metadata = {
 
 type PropTypes = {
   searchParams: {
-    q?: string
     page?: string
-    pulls?: string,
-    state?: 'open' | 'closed' | 'all'
+    q?: string
+    state?: 'open' | 'closed'
+    type?: 'issue' | 'pull-request'
   }
 }
 
 export default async function SearchResults({ searchParams }: PropTypes) {
-  const { q: query, pulls, state } = searchParams || {};
+  const { q: query, state, page, type } = searchParams || {}
   const validQuery = query && query.match(/^https:\/\/github\.com\/([^/]+)\/([^/]+)/)
 
   const noResults = <p>Nothing found.</p>
-
   if (!validQuery) return noResults
 
   const [owner, repo] = validQuery.slice(1)
-  const resp = await getIssues({ owner, repo, state: state || 'all' })
+  const resp = await getIssues({
+    owner,
+    page,
+    repo,
+    state,
+    type,
+  })
 
-  // todo: must be a proper way to to this via the API, but I haven't found one
-  const results = pulls ? resp.data.filter((issue) => issue.pull_request) : resp.data
+  const [total, results] = [resp.data.total_count, resp.data.items]
 
   return (
     <div className="w-1/3 mx-auto my-10 px-2">
-      <h1 className="text-2xl">Search Results</h1>
+      <h1 className="text-2xl">Search Results{total ? `: ${total}` : ''}</h1>
       <p className="mt-3 mb-5">
-        Repo: <a href={query} className="text-blue-500" target="_blank" rel="noreferrer noopener">{query}</a>
+        Repo:{' '}
+        <a href={query} className="text-blue-500" target="_blank" rel="noreferrer noopener">
+          {query}
+        </a>
       </p>
       <SearchFilters />
-      {resp.data.length ? <ResultsList results={results} /> : noResults}
+      {total ? (
+        <>
+          <ResultsList results={results} />
+          <ResultsPagination totalPages={Math.ceil(total / PER_PAGE)} />
+        </>
+      ) : noResults}
     </div>
   )
 }
