@@ -21,7 +21,7 @@ Was there the design at all? Personally, I'd get rid of ShadCN, since at this st
 
 > List a two or three features that you would consider implementing in the future that would add significant value to the project.
 
-1. [In hindsight] Add pagination. GH API has a non-trivial approach to pagination, and figuring it out + implementing it in the project will require additional time. And I'm already overtime. Moreover, the pagination feature was not explicitly mentioned in the requirements.
+1. ~[In hindsight] Add pagination. GH API has a non-trivial approach to pagination, and figuring it out + implementing it in the project will require additional time. And I'm already overtime. Moreover, the pagination feature was not explicitly mentioned in the requirements.~ Done, after figuring out I've been using the wrong endpoint this whole time.
 2. [In hindsight] Augmenting the native HTML input validation (search page) with custom error messages.
 3. The UI of a healthy human being, provided by a professional designer. I'd happily code it down.
 4. Combine the search field and results into a single page. It's cumbersome to go back and forth (but the requirements must be observed).
@@ -48,7 +48,8 @@ It took ~6 hours to complete:
 
 > If you could go back and give yourself advice at the beginning of the project, what would it be?
 
-The freaking response schema and response examples are listed in the GH docs! (although they are very cumbersome to use too).
+1. THIS IS THE ENDPOINT I HAD TO USE: https://docs.github.com/en/rest/search/search !!!!!!111 
+2. The freaking response schema and response examples are listed in the GH docs! (although they are very cumbersome to use too).
 
 > Did you learn anything new?
 
