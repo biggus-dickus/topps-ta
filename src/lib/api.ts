@@ -5,7 +5,7 @@ const octokit = new Octokit({
   auth: process.env.GH_ACCESS_TOKEN,
 })
 
-type BaseParams = {
+export type BaseParams = {
   owner: string
   repo: string
   state?: 'open' | 'closed'
