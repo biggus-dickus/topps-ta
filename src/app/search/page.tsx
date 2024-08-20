@@ -1,8 +1,9 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 import type { BaseParams } from '@/lib/api'
-import ResultsContainer, { NoResults } from '@/components/search/results-container'
+import ResultsContainer from '@/components/search/results-container'
 import SearchFilters from '@/components/search/filters'
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ export default async function SearchResults({ searchParams }: PropTypes) {
   const { q: query, ...rest } = searchParams || {}
   const validQuery = query && query.match(/^https:\/\/github\.com\/([^/]+)\/([^/]+)/)
 
-  if (!validQuery) return <NoResults />
+  if (!validQuery) notFound()
 
   const [owner, repo] = validQuery.slice(1)
   const qp = new URLSearchParams(rest)

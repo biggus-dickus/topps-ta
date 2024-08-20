@@ -3,7 +3,7 @@ import { BaseParams, getIssues, PER_PAGE } from '@/lib/api'
 import ResultsList from '@/components/search/results-list'
 import ResultsPagination from '@/components/search/results-pagination'
 
-export const NoResults = () => <p>Nothing found.</p>
+const NoResults = () => <p>Nothing found.</p>
 
 type PropTypes = BaseParams & { page?: string }
 
