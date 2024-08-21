@@ -1,13 +1,19 @@
 import { ArrowLeftEndOnRectangleIcon as PRIcon, LockClosedIcon } from '@heroicons/react/24/outline'
 import { OctokitResponse } from '@octokit/types'
 
+import { PER_PAGE } from '@/lib/api'
+
 type PropTypes = {
+  currentPage: number
   results: OctokitResponse<any[]>['data'] // todo: find the proper type for the issues list
 }
 
-export default function ResultsList({ results }: PropTypes) {
+export default function ResultsList({ currentPage, results }: PropTypes) {
   return (
-    <ol className="list-decimal pl-8 my-8">
+    <ol
+      className="list-decimal pl-8 my-8"
+      start={currentPage === 1 ? 1 : (currentPage - 1) * PER_PAGE + 1}
+    >
       {results.map((result) => {
         const showIcons = !!result.pull_request || result.state === 'closed'
 

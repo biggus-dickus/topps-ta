@@ -13,7 +13,7 @@ export default async function ResultsContainer({ owner, page, repo, state, type 
 
   return total ? (
     <>
-      <ResultsList results={results} />
+      <ResultsList currentPage={Number(page) || 1} results={results} />
       <p className="mb-6">Total results: {total}</p>
       <ResultsPagination totalPages={Math.ceil(total / PER_PAGE)} />
     </>
